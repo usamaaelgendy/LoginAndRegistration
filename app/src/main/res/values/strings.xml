@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Login Registration</string>
+
+    <string-array name="country_arrays">
+        <item>Choose Country</item>
+        <item>Bangladesh</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
+    </string-array>
+</resources>
