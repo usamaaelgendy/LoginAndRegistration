@@ -104,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="Email"
-                        android:textSize="23sp"
+                        android:textSize="12sp"
                         android:textStyle="italic" />
 
                 </LinearLayout>

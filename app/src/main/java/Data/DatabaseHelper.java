@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /*
-     * CRUD OPERATIONS : CREATE , READ , DELETE , UPDATE  METHODS .
+     * CRUD OPERATIONS : CREATE -->  add user  , DELETE , UPDATE  METHODS .
      *
      */
 
@@ -70,49 +70,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    //return one user info
-    public Register getUser(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(Constants.TABLE_NAME, new String[]{Constants.KEY_ID,
-                        Constants.KEY_USERNAME, Constants.KEY_PASSWORD, Constants.KEY_EMAIL},
-                Constants.KEY_ID + "=?", new String[]{String.valueOf(id)},
-                null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-        Register register = new Register();
-        register.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Constants.KEY_ID))));
-        register.setUserName(cursor.getString(cursor.getColumnIndex(Constants.KEY_USERNAME)));
-        register.setPassword(cursor.getString(cursor.getColumnIndex(Constants.KEY_PASSWORD)));
-        register.setEmail(cursor.getString(cursor.getColumnIndex(Constants.KEY_EMAIL)));
-
-        return register;
-    }
-
-
-    //get all user info
-    public List<Register> getAllUsers() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        List<Register> usersList = new ArrayList<>();
-        //TELL THE SYSTEM IS EVERY THING ORDER BY THE DATA
-
-        Cursor cursor = db.query(Constants.TABLE_NAME, new String[]{
-                Constants.KEY_ID, Constants.KEY_USERNAME, Constants.KEY_PASSWORD,
-                Constants.KEY_EMAIL}, null, null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Register register = new Register();
-                register.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Constants.KEY_ID))));
-                register.setUserName(cursor.getString(cursor.getColumnIndex(Constants.KEY_USERNAME)));
-                register.setPassword(cursor.getString(cursor.getColumnIndex(Constants.KEY_PASSWORD)));
-                register.setEmail(cursor.getString(cursor.getColumnIndex(Constants.KEY_EMAIL)));
-                usersList.add(register);
-            } while (cursor.moveToNext());
-        }
-
-        return usersList;
-    }
 
 
     public int updateUser(Register register) {
@@ -126,12 +83,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public void deleteUser(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(Constants.TABLE_NAME, Constants.KEY_ID + "=?",
-                new String[]{String.valueOf(id)});
-        db.close();
-    }
 
     public int getUsersCount() {
         String countQuery = "SELECT * FROM " + Constants.TABLE_NAME;

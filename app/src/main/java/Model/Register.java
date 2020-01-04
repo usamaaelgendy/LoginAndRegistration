@@ -1,5 +1,6 @@
 package Model;
 
+// POJO class
 public class Register {
     private int id;
     private String userName;
