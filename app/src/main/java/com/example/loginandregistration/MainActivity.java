@@ -11,11 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import Data.DatabaseHelper;
-import Model.Register;
-import Util.Constants;
+import Model.User;
 
 public class MainActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPassword;
@@ -49,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                 Boolean res = db.checkUser(email, password);
-                Register register = new Register();
-                Log.d("IDdetails", String.valueOf(register.getId()));
+                User user = new User();
+                Log.d("IDdetails", String.valueOf(user.getId()));
 
 
                 if (res == true) {

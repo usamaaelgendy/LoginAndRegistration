@@ -2,7 +2,6 @@ package Data;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -11,11 +10,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import Model.Register;
+import Model.User;
 import Util.Constants;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -52,12 +47,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      */
 
-    public long addUser(Register register) {
+    public long addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Constants.KEY_USERNAME, register.getUserName());
-        values.put(Constants.KEY_PASSWORD, register.getPassword());
-        values.put(Constants.KEY_EMAIL, register.getEmail());
+        values.put(Constants.KEY_USERNAME, user.getUserName());
+        values.put(Constants.KEY_PASSWORD, user.getPassword());
+        values.put(Constants.KEY_EMAIL, user.getEmail());
 
         // Error
         long res = db.insert(Constants.TABLE_NAME, null, values);
@@ -72,14 +67,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    public int updateUser(Register register) {
+    public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Constants.KEY_USERNAME, register.getUserName());
-        values.put(Constants.KEY_PASSWORD, register.getPassword());
-        values.put(Constants.KEY_EMAIL, register.getEmail());
+        values.put(Constants.KEY_USERNAME, user.getUserName());
+        values.put(Constants.KEY_PASSWORD, user.getPassword());
+        values.put(Constants.KEY_EMAIL, user.getEmail());
         return db.update(Constants.TABLE_NAME, values, Constants.KEY_ID + "=?",
-                new String[]{String.valueOf(register.getId())});
+                new String[]{String.valueOf(user.getId())});
     }
 
 

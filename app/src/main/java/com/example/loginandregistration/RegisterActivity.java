@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Data.DatabaseHelper;
-import Model.Register;
+import Model.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -45,18 +45,18 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Register register = new Register();
+                User user = new User();
                 String userName = editTextUsername.getText().toString().trim();
                 String email = editTextEmail.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
                 String passwordConf = editTextCnfPassword.getText().toString().trim();
 
                 if (password.equals(passwordConf)) {
-                    register.setUserName(userName);
-                    register.setEmail(email);
+                    user.setUserName(userName);
+                    user.setEmail(email);
 
-                    register.setPassword(password);
-                    long val = db.addUser(register);
+                    user.setPassword(password);
+                    long val = db.addUser(user);
                     if (val > 0) {
                         Toast.makeText(RegisterActivity.this, "You have registered", Toast.LENGTH_SHORT).show();
                         Intent moveToLogin = new Intent(RegisterActivity.this, MainActivity.class);

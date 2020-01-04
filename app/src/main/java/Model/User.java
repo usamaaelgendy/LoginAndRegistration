@@ -1,20 +1,20 @@
 package Model;
 
 // POJO class
-public class Register {
+public class User {
     private int id;
     private String userName;
     private String password;
     private String email ;
 
-    public Register(int id, String userName, String password, String email) {
+    public User(int id, String userName, String password, String email) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.email = email;
     }
 
-    public Register() {
+    public User() {
     }
 
     public int getId() {
@@ -47,5 +47,15 @@ public class Register {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

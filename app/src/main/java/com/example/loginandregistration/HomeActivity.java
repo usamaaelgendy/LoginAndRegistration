@@ -3,9 +3,7 @@ package com.example.loginandregistration;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,10 +15,8 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.List;
-
 import Data.DatabaseHelper;
-import Model.Register;
+import Model.User;
 
 public class HomeActivity extends AppCompatActivity {
     TextView textViewUserName, textViewName, textViewPassword, textViewEmail, textViewLogout;
@@ -104,11 +100,11 @@ public class HomeActivity extends AppCompatActivity {
         dialog = alertDialogBuilder.create();
         dialog.show();
 
-        final Register register = new Register();
-        register.setId(textViewID);
-        register.setUserName(textViewNameString);
-        register.setEmail(textViewEmailString);
-        register.setPassword(textViewPasswordString);
+        final User user = new User();
+        user.setId(textViewID);
+        user.setUserName(textViewNameString);
+        user.setEmail(textViewEmailString);
+        user.setPassword(textViewPasswordString);
 
 
         final DatabaseHelper db = new DatabaseHelper(HomeActivity.this);
@@ -122,8 +118,8 @@ public class HomeActivity extends AppCompatActivity {
                 Log.d("check", editTextPasswordPopup.getText().toString());
 
                 if (Integer.parseInt(editTextPasswordPopup.getText().toString()) == Integer.parseInt(editTextPasswordPopup.getText().toString()) ) {
-                    register.setPassword(editTextPasswordPopup.getText().toString());
-                    db.updateUser(register);
+                    user.setPassword(editTextPasswordPopup.getText().toString());
+                    db.updateUser(user);
                     Toast.makeText(HomeActivity.this, "hi from if condition ", Toast.LENGTH_SHORT).show();
                     Snackbar.make(v, "Details Saved!", Snackbar.LENGTH_LONG).show();
                     startActivity(new Intent(HomeActivity.this, MainActivity.class));
@@ -149,14 +145,14 @@ public class HomeActivity extends AppCompatActivity {
         dialog = alertDialogBuilder.create();
         dialog.show();
 
-        final Register register = new Register();
-        register.setId(textViewID);
-        register.setUserName(textViewNameString);
-        register.setEmail(textViewEmailString);
-        register.setPassword(textViewPasswordString);
+        final User user = new User();
+        user.setId(textViewID);
+        user.setUserName(textViewNameString);
+        user.setEmail(textViewEmailString);
+        user.setPassword(textViewPasswordString);
 
-        editTextUsername.setText(register.getUserName());
-        editTextEmail.setText(register.getEmail());
+        editTextUsername.setText(user.getUserName());
+        editTextEmail.setText(user.getEmail());
 
         final DatabaseHelper db = new DatabaseHelper(HomeActivity.this);
 
@@ -165,12 +161,12 @@ public class HomeActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register.setUserName(editTextUsername.getText().toString());
-                register.setEmail(editTextEmail.getText().toString());
+                user.setUserName(editTextUsername.getText().toString());
+                user.setEmail(editTextEmail.getText().toString());
 
                 if (!editTextUsername.getText().toString().isEmpty()
                         && !editTextEmail.getText().toString().isEmpty()) {
-                    db.updateUser(register);
+                    db.updateUser(user);
                     Snackbar.make(v, "Details Saved!", Snackbar.LENGTH_LONG).show();
                     startActivity(new Intent(HomeActivity.this, MainActivity.class));
                 } else {
